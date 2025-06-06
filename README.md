@@ -25,4 +25,5 @@ modules-center = mtitle
 ```
 
 MPRIS D-BUS specification:
-https://specifications.freedesktop.org/mpris-spec/latest/Media_Player.html
+[https://specifications.freedesktop.org/mpris-spec/latest/Media_Player.html
+](https://specifications.freedesktop.org/mpris-spec/latest/Player_Interface.html)
