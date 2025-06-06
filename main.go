@@ -31,7 +31,7 @@ func getPlayerProperty(object *dbus.BusObject, property string) interface{} {
 	return variant.Value()
 }
 
-func getFormattedOuput(metadata MprisMetadata) string {
+func getFormattedOutput(metadata MprisMetadata) string {
 	return metadata.title + " - " + metadata.artist[0]
 }
 
@@ -56,5 +56,5 @@ func main() {
 	response := getPlayerProperty(&obj, "Metadata").(map[string]dbus.Variant)
 	metadata := newMprisMetadata(response)
 
-	fmt.Print(getFormattedOuput(metadata))
+	fmt.Print(getFormattedOutput(metadata))
 }
