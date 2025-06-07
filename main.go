@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/godbus/dbus/v5"
 )
@@ -24,7 +25,13 @@ func getPlayerProperty(object *dbus.BusObject, property string) interface{} {
 	variant, err := (*object).GetProperty(path)
 
 	if err != nil {
-		fmt.Print(err.Error())
+
+		if !strings.HasPrefix(err.Error(), "No player") {
+			fmt.Print(err.Error())
+		} else {
+			fmt.Print(" ")
+		}
+
 		os.Exit(0)
 	}
 
@@ -32,14 +39,21 @@ func getPlayerProperty(object *dbus.BusObject, property string) interface{} {
 }
 
 func getFormattedOutput(metadata MprisMetadata) string {
-	return metadata.title + " - " + metadata.artist[0]
+
+	artist := metadata.artist[0]
+
+	if len(artist) > 0 {
+		return metadata.title + " - " + artist
+	}
+
+	return metadata.title
 }
 
 func main() {
 	conn, err := dbus.ConnectSessionBus()
 
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 
 	defer conn.Close()
